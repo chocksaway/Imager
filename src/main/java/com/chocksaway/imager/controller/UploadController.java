@@ -35,7 +35,7 @@ public class UploadController {
         return "index";
     }
 
-    @PostMapping("/upload") public String uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException {
+    @PostMapping("/upload") public String uploadImage(Model model, @RequestParam("image") MultipartFile file) {
         StringBuilder fileNames = new StringBuilder();
 
         if (!Objects.requireNonNull(file.getOriginalFilename()).isEmpty()) {
@@ -47,7 +47,7 @@ public class UploadController {
                 logger.error("File Upload Error: {}", ioe.getMessage());
                 throw new RuntimeException(ioe);
             }
-            model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
+            model.addAttribute("msg", "Uploaded images: " + fileNames);
             Image image = new Image(fileNames.toString());
             imageRepository.save(image);
 
