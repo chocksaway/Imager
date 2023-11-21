@@ -4,6 +4,9 @@
     <td th:text="${each.getId()}"></td>
     <td th:text="${each.getName()}"></td>
 </tr>
+<tr th:each="each: ${imageIdList}">
+    <td><img th:src="@{'/images/' + ${each.getName()}}" alt="" /></td>
+</tr>
 </table>
 <section class="my-5">
     <div class="container">

@@ -3,7 +3,7 @@ package com.chocksaway.imager.controller;
 import ch.qos.logback.classic.Logger;
 
 import com.chocksaway.imager.entity.Image;
-import com.chocksaway.imager.repository.ImageRepository;
+import com.chocksaway.imager.service.ImageService;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,21 +14,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
 @Controller
 public class UploadController {
-    private final ImageRepository imageRepository;
-
+    private final ImageService imageService;
 
     private static final Logger logger
             = (Logger) LoggerFactory.getLogger(UploadController.class);
-    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/uploads";
 
-    public UploadController(ImageRepository imageRepository) {
-        this.imageRepository = imageRepository;
+
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/images";
+    // /home/milesd/workspace/Imager
+
+
+    public UploadController(ImageService imageService) {
+        this.imageService = imageService;
     }
 
     @GetMapping("/uploadimage") public String displayUploadForm() {
@@ -36,10 +38,10 @@ public class UploadController {
     }
 
     @PostMapping("/upload") public String uploadImage(Model model, @RequestParam("image") MultipartFile file) {
-        StringBuilder fileNames = new StringBuilder();
+        var fileNames = new StringBuilder();
 
         if (!Objects.requireNonNull(file.getOriginalFilename()).isEmpty()) {
-            Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+            var fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
             fileNames.append(file.getOriginalFilename());
             try {
                 Files.write(fileNameAndPath, file.getBytes());
@@ -48,10 +50,10 @@ public class UploadController {
                 throw new RuntimeException(ioe);
             }
             model.addAttribute("msg", "Uploaded images: " + fileNames);
-            Image image = new Image(fileNames.toString());
-            imageRepository.save(image);
+            var image = new Image(fileNames.toString());
+            imageService.save(image);
 
-            Iterable<Image> imageIdList = imageRepository.findAll();
+            var imageIdList = imageService.findAll();
             model.addAttribute("imageIdList", imageIdList);
 
         }
