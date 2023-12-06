@@ -3,6 +3,7 @@
 <tr th:each="each: ${imageIdList}">
     <td th:text="${each.getId()}"></td>
     <td th:text="${each.getName()}"></td>
+    <td th:text="${each.getDescription()}"></td>
 </tr>
 <tr th:each="each: ${imageIdList}">
     <td><img th:src="@{'/images/' + ${each.getName()}}" alt="" /></td>
@@ -14,9 +15,11 @@
             <div class="col-md-8 mx-auto">
                 <h2>Upload Image Example</h2>
                 <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
-                <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+                <form method="post" th:action="@{/upload}" th:object="${description}" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="file" name="image" accept="image/*" class="form-control-file">
+                        <input type="file" name="image" accept="image/*" class="form-control-file"><br>
+                        <label for="description">Description</label><br>
+                        <input type="text" id="description" name="description"><br>
                     </div>
                     <button type="submit" class="btn btn-primary">Upload image</button>
                 </form>

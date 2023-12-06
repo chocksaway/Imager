@@ -11,11 +11,13 @@ public class Image {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String name;
+    private Description description;
 
     protected Image() {}
 
-    public Image(String name) {
+    public Image(String name, Description description) {
         this.name = name;
+        this.description = description;
     }
 
     public String getName() {
@@ -24,5 +26,9 @@ public class Image {
 
     public Long getId() {
         return id;
+    }
+
+    public Description getDescription() {
+        return description;
     }
 }

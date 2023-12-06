@@ -2,12 +2,14 @@ package com.chocksaway.imager.controller;
 
 import ch.qos.logback.classic.Logger;
 
+import com.chocksaway.imager.entity.Description;
 import com.chocksaway.imager.entity.Image;
 import com.chocksaway.imager.service.ImageService;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,7 +39,9 @@ public class UploadController {
         return "index";
     }
 
-    @PostMapping("/upload") public String uploadImage(Model model, @RequestParam("image") MultipartFile file) {
+    @PostMapping("/upload") public String uploadImage(Model model,
+                                                      @RequestParam("image") MultipartFile file,
+                                                      @ModelAttribute Description description) {
         var fileNames = new StringBuilder();
 
         if (!Objects.requireNonNull(file.getOriginalFilename()).isEmpty()) {
@@ -50,7 +54,7 @@ public class UploadController {
                 throw new RuntimeException(ioe);
             }
             model.addAttribute("msg", "Uploaded images: " + fileNames);
-            var image = new Image(fileNames.toString());
+            var image = new Image(fileNames.toString(), description);
             imageService.save(image);
 
             var imageIdList = imageService.findAll();
