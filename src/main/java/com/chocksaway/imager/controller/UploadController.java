@@ -56,7 +56,7 @@ public class UploadController {
             }
             model.addAttribute("msg", "Uploaded images: " + fileNames);
 
-            var image = new Image(fileNames.toString(), description, new Display(0,0,false));
+            var image = new Image(fileNames.toString(), description, new Display(50,50,false));
             imageService.save(image);
 
             var imageIdList = imageService.findAll();

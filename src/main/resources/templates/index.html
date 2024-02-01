@@ -6,7 +6,7 @@
     <td th:text="${each.getDescription()}"></td>
 </tr>
 <tr th:each="each: ${imageIdList}">
-    <td><img th:src="@{'/images/' + ${each.getName()}}" alt="" /></td>
+    <td><img th:src="@{'/images/' + ${each.getName()}}" th:width="${each.getDisplay().width()}" th:height="${each.getDisplay().height()}"  alt="" /></td>
 </tr>
 </table>
 <section class="my-5">

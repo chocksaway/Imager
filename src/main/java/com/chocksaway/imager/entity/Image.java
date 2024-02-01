@@ -34,4 +34,8 @@ public class Image {
     public Description getDescription() {
         return description;
     }
+
+    public Display getDisplay() {
+        return display;
+    }
 }
