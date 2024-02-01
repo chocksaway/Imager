@@ -3,6 +3,7 @@ package com.chocksaway.imager.controller;
 import ch.qos.logback.classic.Logger;
 
 import com.chocksaway.imager.entity.Description;
+import com.chocksaway.imager.entity.Display;
 import com.chocksaway.imager.entity.Image;
 import com.chocksaway.imager.service.ImageService;
 import org.slf4j.LoggerFactory;
@@ -54,7 +55,8 @@ public class UploadController {
                 throw new RuntimeException(ioe);
             }
             model.addAttribute("msg", "Uploaded images: " + fileNames);
-            var image = new Image(fileNames.toString(), description);
+
+            var image = new Image(fileNames.toString(), description, new Display(0,0,false));
             imageService.save(image);
 
             var imageIdList = imageService.findAll();

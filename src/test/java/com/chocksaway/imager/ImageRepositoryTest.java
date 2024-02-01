@@ -1,6 +1,7 @@
 package com.chocksaway.imager;
 
 import com.chocksaway.imager.entity.Description;
+import com.chocksaway.imager.entity.Display;
 import com.chocksaway.imager.entity.Image;
 import com.chocksaway.imager.repository.ImageRepository;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,9 @@ class ImageRepositoryTest {
     private ImageRepository imageRepository;
     @Test
     public void whenFindById_thenReturnEmployee() {
-        Image myImage = new Image("001", new Description("Image 001"));
+        Image myImage = new Image("001",
+                new Description("Image 001"),
+                new Display(0,0, false));
         imageRepository.save(myImage);
 
         Optional<Image> foundImageById = imageRepository.findById(1L);

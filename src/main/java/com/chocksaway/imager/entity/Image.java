@@ -13,9 +13,12 @@ public class Image {
     private String name;
     private Description description;
 
+    private Display display;
+
     protected Image() {}
 
-    public Image(String name, Description description) {
+    public Image(String name, Description description, Display display) {
+        this.display = display;
         this.name = name;
         this.description = description;
     }
