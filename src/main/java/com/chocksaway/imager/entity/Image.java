@@ -9,16 +9,16 @@ public class Image {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String name;
-    private Description description;
+    //private Description description;
 
-    private Display display;
+    //private Display display;
 
     protected Image() {}
 
     public Image(String name, Description description, Display display) {
-        this.display = display;
         this.name = name;
-        this.description = description;
+        //this.display = display;
+        //this.description = description;
     }
 
     public String getName() {
@@ -29,11 +29,11 @@ public class Image {
         return id;
     }
 
-    public Description getDescription() {
-        return description;
-    }
-
-    public Display getDisplay() {
-        return display;
-    }
+//    public Description getDescription() {
+//        return description;
+//    }
+//
+//    public Display getDisplay() {
+//        return display;
+//    }
 }
