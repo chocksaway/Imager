@@ -8,32 +8,35 @@ public class Image {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    private String name;
-    //private Description description;
 
-    //private Display display;
+    @Column(name = "name")
+    private String name;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "description_id")
+    private Description description;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", referencedColumnName = "display_id")
+    private Display display;
 
     protected Image() {}
 
     public Image(String name, Description description, Display display) {
         this.name = name;
-        //this.display = display;
-        //this.description = description;
+        this.display = display;
+        this.description = description;
     }
 
     public String getName() {
         return name;
     }
 
-    public Long getId() {
-        return id;
+    public Description getDescription() {
+        return description;
     }
 
-//    public Description getDescription() {
-//        return description;
-//    }
-//
-//    public Display getDisplay() {
-//        return display;
-//    }
+    public Display getDisplay() {
+        return display;
+    }
 }
