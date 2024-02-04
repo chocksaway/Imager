@@ -30,15 +30,15 @@ public class Display implements Serializable {
     }
 
 
-    public int height() {
+    public int getHeight() {
         return height;
     }
 
-    public int width() {
+    public int getWidth() {
         return width;
     }
 
-    public boolean border() {
+    public boolean getBorder() {
         return border;
     }
 

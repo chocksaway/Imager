@@ -39,4 +39,8 @@ public class Image {
     public Display getDisplay() {
         return display;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

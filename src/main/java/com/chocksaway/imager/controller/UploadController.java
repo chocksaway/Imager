@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Objects;
+import javax.imageio.ImageIO;
 
 @Controller
 public class UploadController {
@@ -47,16 +50,22 @@ public class UploadController {
 
         if (!Objects.requireNonNull(file.getOriginalFilename()).isEmpty()) {
             var fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+
             fileNames.append(file.getOriginalFilename());
+            Display display;
             try {
+
                 Files.write(fileNameAndPath, file.getBytes());
+                File inputFile = fileNameAndPath.toFile();
+                BufferedImage bufferedImage = ImageIO.read(inputFile);
+                display = new Display(bufferedImage.getHeight(), bufferedImage.getWidth(), false);
             } catch (IOException ioe) {
                 logger.error("File Upload Error: {}", ioe.getMessage());
                 throw new RuntimeException(ioe);
             }
             model.addAttribute("msg", "Uploaded images: " + fileNames);
 
-            var image = new Image(fileNames.toString(), description, new Display(50,50,false));
+            var image = new Image(fileNames.toString(), description, display);
             imageService.save(image);
 
             var imageIdList = imageService.findAll();

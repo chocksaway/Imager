@@ -16,7 +16,6 @@ public class ImageService {
         imageRepository.save(image);
     }
 
-
     public Iterable<Image> findAll() {
         return imageRepository.findAll();
     }
