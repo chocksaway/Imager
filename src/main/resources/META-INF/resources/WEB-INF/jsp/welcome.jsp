@@ -4,8 +4,8 @@
 <body>
 <div>Welcome page</div>
 
-<div>You name ${name}</div>
-<div>You password: ${password}</div>
+<div>Welcome ${name} :D</div>
+
 
 </body>
 </html>

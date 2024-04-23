@@ -5,6 +5,7 @@ import com.chocksaway.imager.service.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,11 +28,16 @@ public class LoginController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginWithCredentials(@RequestParam String name, @RequestParam String password, ModelMap model) {
-        model.put("name", name);
-        model.put("password", password);
+    public String loginWithCredentials(@RequestParam String name, @RequestParam String password) {
+        if (authenticationService.authenticate(name, password)) {
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("name", name);
+            logger.info("Login successful");
+            return "welcome";
+        }
 
-        return authenticationService.authenticate(name, password) ? "welcome" : "login";
+        logger.info("Login failed");
+        return "login";
     }
 
 }

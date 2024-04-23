@@ -1,0 +1,1 @@
+INSERT INTO login (name, password) VALUES ('milesd', 'password');
