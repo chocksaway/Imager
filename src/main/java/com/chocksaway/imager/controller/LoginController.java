@@ -27,15 +27,15 @@ public class LoginController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginWithCredentials(@RequestParam String name, @RequestParam String password) {
+    public String loginWithCredentials(@RequestParam String name, @RequestParam String password, ModelMap modelMap) {
         if (authenticationService.authenticate(name, password)) {
-            ModelMap modelMap = new ModelMap();
             modelMap.addAttribute("name", name);
             logger.info("Login successful");
             return "welcome";
         }
 
         logger.info("Login failed");
+        modelMap.put("errorMessage", "Invalid username or password");
         return "login";
     }
 
