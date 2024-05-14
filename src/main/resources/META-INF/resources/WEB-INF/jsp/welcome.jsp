@@ -2,11 +2,11 @@
 
 <html>
 <body>
-<div>Welcome page</div>
+<div class="container">
+    <h1>Welcome page</h1>
 
-<div>Welcome ${name} :D</div>
-<div><a href="list-todos">Manage</a> your todos</div>
-
-
+    <div>Welcome ${name} :D</div>
+    <a href="list-todos">Manage</a> your todos
+</div>
 </body>
 </html>

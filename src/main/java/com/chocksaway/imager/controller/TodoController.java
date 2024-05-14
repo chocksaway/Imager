@@ -26,4 +26,9 @@ public class TodoController {
 
         return "list-todos";
     }
+
+    @RequestMapping("add-todos")
+    public String showNewTodoPage() {
+        return "add-todos";
+    }
 }

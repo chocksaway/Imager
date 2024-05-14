@@ -17,6 +17,26 @@ public class Todo {
         this.done = done;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDate getTargetDate() {
+        return targetDate;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
     @Override
     public String toString() {
         return "Todo{" +

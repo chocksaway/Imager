@@ -13,9 +13,9 @@ public class ToDoService {
     static {
         todoList.add(new Todo(1, "milesd", "Learn AWS",
                 LocalDate.now().plusYears(1), false));
-        todoList.add(new Todo(1, "milesd", "Learn DevOps",
+        todoList.add(new Todo(2, "milesd", "Learn DevOps",
                 LocalDate.now().plusYears(2), false));
-        todoList.add(new Todo(1, "milesd", "Learn full stack development",
+        todoList.add(new Todo(3, "milesd", "Learn full stack development",
                 LocalDate.now().plusYears(3), false));
     }
 
