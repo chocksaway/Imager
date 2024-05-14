@@ -5,8 +5,11 @@ import com.chocksaway.imager.service.ToDoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -27,8 +30,22 @@ public class TodoController {
         return "list-todos";
     }
 
-    @RequestMapping("add-todos")
-    public String showNewTodoPage() {
+    @RequestMapping(value = "add-todos", method = RequestMethod.GET)
+    public String addTodos(ModelMap model) {
+        String username = (String) model.getAttribute("name");
+        Todo todo = new Todo(0, username, "",
+                LocalDate.now().plusYears(1), false);
+        model.put("todo", todo);
         return "add-todos";
+    }
+
+    @RequestMapping(value = "add-todos", method = RequestMethod.POST)
+    public String addNewTodo(Todo todo, ModelMap model) {
+        var username = (String) model.get("username");
+        toDoService.addTodo(username,
+                todo.getDescription(),
+                LocalDate.now().plusYears(1),
+                false);
+        return "redirect:list-todos";
     }
 }
