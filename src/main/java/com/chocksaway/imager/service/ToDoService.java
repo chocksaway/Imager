@@ -1,12 +1,14 @@
 package com.chocksaway.imager.service;
 
 import com.chocksaway.imager.domain.Todo;
+import com.chocksaway.imager.exception.TodoNoFoundException;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 @Service
@@ -43,7 +45,11 @@ public class ToDoService {
     public Todo findById(int id) {
         Predicate<? super Todo> predicate =
                 each -> each.getId() == id;
-        return todoList.stream().filter(predicate).findFirst().get();
+        Optional<Todo> todoOptional = todoList.stream()
+                .filter(predicate)
+                .findFirst();
+        return todoOptional.orElse(null);
+
     }
 
     public void updateTodo(@Valid Todo todo) {

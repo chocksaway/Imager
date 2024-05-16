@@ -58,7 +58,6 @@ public class TodoController {
     }
 
 
-
     @RequestMapping(value = "add-todos", method = RequestMethod.GET)
     public String addTodos(ModelMap model) {
         String username = (String) model.getAttribute("name");
