@@ -6,10 +6,10 @@ import java.time.LocalDate;
 
 public class Todo {
     private final int id;
-    private final String username;
+    private String username;
     @Size(min = 10, max = 255, message="The description size is incorrect")
     private final String description;
-    private final LocalDate targetDate;
+    private LocalDate targetDate;
     private final boolean done;
 
     public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
@@ -28,12 +28,20 @@ public class Todo {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public LocalDate getTargetDate() {
         return targetDate;
+    }
+
+    public void setTargetDate(LocalDate targetDate) {
+        this.targetDate = targetDate;
     }
 
     public boolean isDone() {

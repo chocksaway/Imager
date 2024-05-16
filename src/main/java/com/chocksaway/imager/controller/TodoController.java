@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
@@ -30,6 +31,33 @@ public class TodoController {
 
         return "list-todos";
     }
+
+    @RequestMapping(value ="delete-todo")
+    public String deleteTodo(@RequestParam int id, ModelMap model) {
+        toDoService.deleteById(id);
+        return "redirect:list-todos";
+    }
+
+    @RequestMapping(value ="update-todo", method = RequestMethod.GET)
+    public String showUpdateTodoPage(@RequestParam int id, ModelMap model) {
+        Todo todo = toDoService.findById(id);
+        model.addAttribute("todo", todo);
+        return "add-todos";
+    }
+
+    @RequestMapping(value = "update-todo", method = RequestMethod.POST)
+    public String updateTodo(@Valid Todo todo, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            return "add-todos";
+        }
+
+        todo.setUsername((String) model.get("username"));
+        todo.setTargetDate(LocalDate.now().plusYears(1));
+        toDoService.updateTodo(todo);
+        return "redirect:list-todos";
+    }
+
+
 
     @RequestMapping(value = "add-todos", method = RequestMethod.GET)
     public String addTodos(ModelMap model) {
