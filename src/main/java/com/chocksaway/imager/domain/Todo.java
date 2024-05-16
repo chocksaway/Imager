@@ -1,10 +1,13 @@
 package com.chocksaway.imager.domain;
 
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class Todo {
     private final int id;
     private final String username;
+    @Size(min = 10, max = 255, message="The description size is incorrect")
     private final String description;
     private final LocalDate targetDate;
     private final boolean done;

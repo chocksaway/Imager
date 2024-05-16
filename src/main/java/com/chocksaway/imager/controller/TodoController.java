@@ -2,11 +2,12 @@ package com.chocksaway.imager.controller;
 
 import com.chocksaway.imager.domain.Todo;
 import com.chocksaway.imager.service.ToDoService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
@@ -40,7 +41,10 @@ public class TodoController {
     }
 
     @RequestMapping(value = "add-todos", method = RequestMethod.POST)
-    public String addNewTodo(Todo todo, ModelMap model) {
+    public String addNewTodo(@Valid Todo todo, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            return "add-todos";
+        }
         var username = (String) model.get("username");
         toDoService.addTodo(username,
                 todo.getDescription(),
