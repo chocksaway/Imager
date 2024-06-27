@@ -52,7 +52,6 @@ public class TodoController {
         }
 
         todo.setUsername((String) model.get("username"));
-        todo.setTargetDate(LocalDate.now().plusYears(1));
         toDoService.updateTodo(todo);
         return "redirect:list-todos";
     }

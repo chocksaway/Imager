@@ -1,7 +1,6 @@
 package com.chocksaway.imager.service;
 
 import com.chocksaway.imager.domain.Todo;
-import com.chocksaway.imager.exception.TodoNoFoundException;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
