@@ -2,15 +2,19 @@ package com.chocksaway.imager.domain;
 
 import jakarta.validation.constraints.Size;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Todo {
+public class Todo implements Serializable {
     private final int id;
     private String username;
     @Size(min = 10, max = 255, message="The description size is incorrect")
     private final String description;
     private LocalDate targetDate;
     private final boolean done;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
         this.id = id;

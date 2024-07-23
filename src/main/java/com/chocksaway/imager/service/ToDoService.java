@@ -2,6 +2,7 @@ package com.chocksaway.imager.service;
 
 import com.chocksaway.imager.domain.Todo;
 import jakarta.validation.Valid;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,6 +23,8 @@ public class ToDoService {
                 LocalDate.now().plusYears(2), false));
         todoList.add(new Todo(3, "milesd", "Learn full stack development",
                 LocalDate.now().plusYears(3), false));
+        todoList.add(new Todo(12, "milesd", "Learn AWS in 5 minutes",
+                LocalDate.now().plusYears(3), false));
 
         todoCount = todoList.size();
     }
@@ -41,6 +44,10 @@ public class ToDoService {
         todoList.removeIf(predicate);
     }
 
+    @Cacheable(
+            value = "toDoCache",
+            key = "#id",
+            condition = "#id>10")
     public Todo findById(int id) {
         Predicate<? super Todo> predicate =
                 each -> each.getId() == id;
