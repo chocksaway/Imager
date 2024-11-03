@@ -1,12 +1,8 @@
-<%@page contentType="text/html; ISO-8859-1" language="java" %>
+<%@include file="common/header.jspf"%>
+<%@include file="common/navigation.jspf"%>
 
-<html>
-<body>
 <div class="container">
-    <h1>Welcome page</h1>
-
     <div>Welcome ${name} :D</div>
     <a href="list-todos">Manage</a> your todos
 </div>
-</body>
-</html>
+<%@include file="common/footer.jspf"%>
