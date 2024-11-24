@@ -3,39 +3,39 @@ package com.chocksaway.imager.service;
 import com.chocksaway.imager.entities.Picture;
 import com.chocksaway.imager.entities.User;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PictureServiceTest {
     PictureService pictureService = new PictureService();
 
-     @Test
-     public void testGetPicture() {
-         var picture = pictureService.getPicture("picture1");
-         assertTrue(picture.isPresent());
-         assertEquals("picture1", picture.get().getName());
-     }
+    @Test
+    public void testGetPicture() {
+        ResponseEntity<Picture> response = pictureService.getPicture("picture1");
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("picture1", response.getBody().getName());
+    }
 
-     @Test
-     public void testPictureNotFound() {
-         var picture = pictureService.getPicture("notFound");
-         assertTrue(picture.isEmpty());
-     }
+    @Test
+    public void testPictureNotFound() {
+        ResponseEntity<Picture> response = pictureService.getPicture("notFound");
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 
     @Test
     public void testGetPictureWithName() {
-        Optional<Map<User, Picture>> result = pictureService.getPictureWithName("user1", "picture1");
+        ResponseEntity<Map<User, Picture>> response = pictureService.getPictureWithName("user1", "picture1");
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(1, response.getBody().size());
 
-        assertTrue(result.isPresent());
-        assertEquals(1, result.get().size());
-
-        var user = result.get().keySet().iterator().next();
-
-        var picture = result.get().values().iterator().next();
+        var user = response.getBody().keySet().iterator().next();
+        var picture = response.getBody().values().iterator().next();
 
         assertEquals("user1", user.getUsername());
         assertEquals("picture1", picture.getName());
