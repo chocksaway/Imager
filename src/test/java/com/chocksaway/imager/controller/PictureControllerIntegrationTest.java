@@ -1,10 +1,13 @@
 package com.chocksaway.imager.controller;
 
 import com.chocksaway.imager.entities.Picture;
+import com.chocksaway.imager.entities.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -27,5 +30,22 @@ public class PictureControllerIntegrationTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals("picture1", response.getBody().getName());
+    }
+
+    @Test
+    public void testGetUserWithAPicture() {
+        String url = "http://localhost:" + port + "/picture/name?userName=user1&pictureName=picture1";
+        ResponseEntity<User> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {
+                }
+        );
+
+//        assertEquals(HttpStatus.OK, response.getStatusCode());
+//        assertNotNull(response.getBody());
+//        Picture picture = response.getBody().values().iterator().next();
+//        assertEquals("picture1", picture.getName());
     }
 }

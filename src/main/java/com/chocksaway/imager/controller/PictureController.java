@@ -1,6 +1,7 @@
 package com.chocksaway.imager.controller;
 
 import com.chocksaway.imager.entities.Picture;
+import com.chocksaway.imager.entities.User;
 import com.chocksaway.imager.service.PictureService;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,13 @@ public class PictureController {
 
     @GetMapping(value = "/picture", produces = "application/json")
     public ResponseEntity<Picture> getPicture(@RequestParam String name, ModelMap model) {
-        logger.info("Received request for picture with name: {}", name);
+        logger.info("Received request for picture : {}", name);
         return pictureService.getPicture(name);
+    }
+
+    @GetMapping(value = "/picture/name", produces = "application/json")
+    public ResponseEntity<User> getPictureWithName(@RequestParam String userName, @RequestParam String pictureName, ModelMap model) {
+        logger.info("Received request for picture {} with name {}", userName, pictureName);
+        return pictureService.getPictureWithName(userName, pictureName);
     }
 }

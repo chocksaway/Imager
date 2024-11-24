@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class PictureService {
@@ -33,20 +33,22 @@ public class PictureService {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    public ResponseEntity<Map<User, Picture>> getPictureWithName(String userName, String pictureName) {
-        final var user = users.stream()
+    public ResponseEntity<User> getPictureWithName(String userName, String pictureName) {
+        Optional<User> user = users.stream()
                 .filter(u -> u.getUsername().equals(userName))
                 .findFirst();
 
-        if (user.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        final var picture = pictures.stream()
+        Optional<Picture> picture = pictures.stream()
                 .filter(p -> p.getName().equals(pictureName))
                 .findFirst();
 
-        return picture.map(value -> new ResponseEntity<>(Map.of(user.get(), value), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (user.isPresent() && picture.isPresent()) {
+            List<Picture> pictureList = List.of(picture.get());
+            return new ResponseEntity<>(User.builder()
+                    .username(user.get().getUsername())
+                    .pictures(pictureList).build(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

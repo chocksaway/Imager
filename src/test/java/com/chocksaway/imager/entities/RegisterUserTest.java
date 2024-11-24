@@ -16,7 +16,7 @@ public class RegisterUserTest {
         RegisteredUser registeredUser = RegisteredUser.builder()
                 .username("milesd")
                 .role("admin")
-                .pictures(pictures)
+                //.pictures(pictures)
                 .build();
 
         assert(registeredUser.getUsername().equals("milesd"));

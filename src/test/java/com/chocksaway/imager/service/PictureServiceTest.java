@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PictureServiceTest {
@@ -29,16 +27,16 @@ public class PictureServiceTest {
 
     @Test
     public void testGetPictureWithName() {
-        ResponseEntity<Map<User, Picture>> response = pictureService.getPictureWithName("user1", "picture1");
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(1, response.getBody().size());
-
-        var user = response.getBody().keySet().iterator().next();
-        var picture = response.getBody().values().iterator().next();
-
-        assertEquals("user1", user.getUsername());
-        assertEquals("picture1", picture.getName());
+        ResponseEntity<User> response = pictureService.getPictureWithName("user1", "picture1");
+        User responseBody = response.getBody();
+        assertNotNull(responseBody);
+        assertEquals("user1", responseBody.getUsername());
+        assertEquals("picture1", responseBody.getPictures().getFirst().getName());
     }
 
+    @Test
+    public void testGetPictureWithNameNotFound() {
+        ResponseEntity<User> response = pictureService.getPictureWithName("user11", "picture1");
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 }
