@@ -43,9 +43,13 @@ public class PictureControllerIntegrationTest {
                 }
         );
 
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertNotNull(response.getBody());
-//        Picture picture = response.getBody().values().iterator().next();
-//        assertEquals("picture1", picture.getName());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+
+        User user = response.getBody();
+        Picture picture = user.getPictures().getFirst();
+
+        assertEquals("user1", user.getUsername());
+        assertEquals("picture1", picture.getName());
     }
 }
