@@ -18,6 +18,9 @@ public class User {
     @JsonProperty("username")
     private String username;
 
+    @JsonProperty("age")
+    private int age;
+
     @JsonProperty("pictures")
     List<Picture> pictures;
 }
