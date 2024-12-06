@@ -51,11 +51,6 @@ public class MongoTemplateTest {
     }
 
     @Test
-    public void simpleTest() {
-        assertThat(1, is(1));
-    }
-
-    @Test
     public void givenUsersExist_whenFindingUserWithAgeLessThan50AndGreaterThan20_thenUsersAreFound() {
         var user = User.builder()
                 .username("Eric")

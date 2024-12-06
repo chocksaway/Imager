@@ -21,7 +21,7 @@
             <c:forEach items="${todos}" var="todo">
                 <tr>
                     <td>${todo.id}</td>
-                    <td>${todo.description}</td>
+                    <td><a href="photo?id=${todo.photoId}">${todo.description}</a></td>
                     <td>${todo.targetDate}</td>
                     <td>${todo.done}</td>
                     <td><a href="delete-todo?id=${todo.id}" class="btn btn-warning">Delete</a></td>

@@ -16,15 +16,17 @@ public class ToDoService {
 
     private static final List<Todo> todoList = new ArrayList<>();
     public static int todoCount = 0;
+
     static {
-        todoList.add(new Todo(1, "milesd", "Learn AWS 12345",
-                LocalDate.now().plusYears(1), false));
-        todoList.add(new Todo(2, "milesd", "Learn DevOps",
-                LocalDate.now().plusYears(2), false));
-        todoList.add(new Todo(3, "milesd", "Learn full stack development",
-                LocalDate.now().plusYears(3), false));
-        todoList.add(new Todo(12, "milesd", "Learn AWS in 5 minutes",
-                LocalDate.now().plusYears(3), false));
+        todoList.add(Todo.builder().id(0).username("milesd").description("Learn AWS").build());
+
+        todoList.add(Todo.builder().id(1).username("milesd").description("Learn AWS 12345").build());
+
+        todoList.add(Todo.builder().id(2).username("milesd").description("Learn DevOps").build());
+
+        todoList.add(Todo.builder().id(3).username("milesd").description("Learn full stack development").build());
+
+        todoList.add(Todo.builder().id(4).username("milesd").description("Learn AWS in 5 minutes").build());
 
         todoCount = todoList.size();
     }
@@ -33,8 +35,15 @@ public class ToDoService {
         return todoList;
     }
 
-    public void addTodo(String username, String description, LocalDate localDate, boolean done) {
-        Todo todo = new Todo(++todoCount, username, description, localDate, done);
+    public void addTodo(String username, String description, LocalDate localDate, boolean done, String photoId) {
+        var todo = Todo.builder().username(username)
+                .id(++todoCount)
+                .description(description)
+                .targetDate(localDate)
+                .done(done)
+                .photoId(photoId)
+                .build();
+
         todoList.add(todo);
     }
 
