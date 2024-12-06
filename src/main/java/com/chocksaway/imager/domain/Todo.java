@@ -21,7 +21,7 @@ public class Todo implements Serializable {
     private String description;
     private LocalDate targetDate;
     private boolean done;
-    private String photoId = null;;
+    private String photoId = null;
     @Serial
     private static final long serialVersionUID = 1L;
 
