@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 public class ToDoService {
 
     private static final List<Todo> todoList = new ArrayList<>();
-    public static int todoCount = 0;
+    public static int todoCount;
 
     static {
         todoList.add(Todo.builder().id(0).username("milesd").description("Learn AWS").build());
@@ -32,7 +32,7 @@ public class ToDoService {
     }
 
     public List<Todo> findByUsername(String username) {
-        return todoList;
+        return todoList.stream().filter(each -> each.getUsername().equals(username)).toList();
     }
 
     public void addTodo(String username, String description, LocalDate localDate, boolean done, String photoId) {
