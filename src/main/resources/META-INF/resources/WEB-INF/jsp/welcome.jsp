@@ -3,6 +3,6 @@
 
 <div class="container">
     <div>Welcome ${name} :D</div>
-    <a href="list-todos">Manage</a> your todos
+    <a href="list-gallery">Manage</a> your Gallery
 </div>
 <%@include file="common/footer.jspf"%>

@@ -5,9 +5,9 @@
             http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
             http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
 
-    <cache alias="toDoCache">
+    <cache alias="GalleryCache">
         <key-type>java.lang.Integer</key-type>
-        <value-type>com.chocksaway.imager.domain.Todo</value-type>
+        <value-type>com.chocksaway.imager.domain.Gallery</value-type>
         <expiry>
             <ttl unit="seconds">30</ttl>
         </expiry>

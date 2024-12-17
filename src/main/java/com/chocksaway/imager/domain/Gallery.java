@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Todo implements Serializable {
+public class Gallery implements Serializable {
     private int id;
     private String username;
     @Size(min = 10, max = 255, message="The description size is incorrect")
@@ -26,7 +26,7 @@ public class Todo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public String toString() {
-        return "Todo{" +
+        return "Gallery{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", description='" + description + '\'' +
