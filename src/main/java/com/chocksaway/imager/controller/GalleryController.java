@@ -76,7 +76,6 @@ public class GalleryController {
             return "add-gallery";
         }
 
-        gallery.setUsername((String) model.get("username"));
         galleryService.updateGallery(gallery);
         return "redirect:list-gallery";
     }

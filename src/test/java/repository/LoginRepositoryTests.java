@@ -1,4 +1,4 @@
-package com.chocksaway.imager;
+package repository;
 
 import com.chocksaway.imager.domain.Login;
 import com.chocksaway.imager.repository.LoginRepository;

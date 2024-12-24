@@ -14,48 +14,46 @@ import java.util.function.Predicate;
 @Service
 public class GalleryService {
 
-    private static final List<Gallery> GalleryList = new ArrayList<>();
-    public static int GalleryCount;
+    private static final List<Gallery> galleryList = new ArrayList<>();
+    public static int galleryCount;
 
     static {
-        GalleryList.add(Gallery.builder().id(0).username("milesd").description("Learn AWS").build());
+        galleryList.add(Gallery.builder().id(0).username("milesd").description("Learn AWS").build());
 
-        GalleryList.add(Gallery.builder().id(1).username("milesd").description("Learn AWS 12345").build());
+        galleryList.add(Gallery.builder().id(1).username("milesd").description("Learn AWS 12345").build());
 
-        GalleryList.add(Gallery.builder().id(2).username("milesd").description("Learn DevOps").build());
+        galleryList.add(Gallery.builder().id(2).username("milesd").description("Learn DevOps").build());
 
-        GalleryList.add(Gallery.builder().id(3).username("milesd").description("Learn full stack development").build());
+        galleryList.add(Gallery.builder().id(3).username("milesd").description("Learn full stack development").build());
 
-        GalleryList.add(Gallery.builder().id(4).username("milesd").description("Learn AWS in 5 minutes").build());
+        galleryList.add(Gallery.builder().id(4).username("milesd").description("Learn AWS in 5 minutes").build());
 
-        GalleryCount = GalleryList.size();
+        galleryCount = galleryList.size();
     }
 
     public List<Gallery> findByUsername(String username) {
-        if (username == null) {
-            return new ArrayList<>();
-        }
-        return GalleryList.stream()
+        return galleryList.stream()
                 .filter(each ->
                         each.getUsername().equals(username)).toList();
     }
 
     public void addGallery(String username, String description, LocalDate localDate, boolean done, String photoId) {
-        var gallery = Gallery.builder().username(username)
-                .id(++GalleryCount)
+        var gallery = Gallery.builder()
+                .username(username)
+                .id(++galleryCount)
                 .description(description)
                 .targetDate(localDate)
                 .done(done)
                 .photoId(photoId)
                 .build();
 
-        GalleryList.add(gallery);
+        galleryList.add(gallery);
     }
 
     public void deleteById(int id) {
         Predicate<? super Gallery> predicate =
                 each -> each.getId() == id;
-        GalleryList.removeIf(predicate);
+        galleryList.removeIf(predicate);
     }
 
     @Cacheable(
@@ -65,7 +63,7 @@ public class GalleryService {
     public Gallery findById(int id) {
         Predicate<? super Gallery> predicate =
                 each -> each.getId() == id;
-        Optional<Gallery> GalleryOptional = GalleryList.stream()
+        Optional<Gallery> GalleryOptional = galleryList.stream()
                 .filter(predicate)
                 .findFirst();
         return GalleryOptional.orElse(null);
@@ -74,6 +72,6 @@ public class GalleryService {
 
     public void updateGallery(@Valid Gallery Gallery) {
         deleteById(Gallery.getId());
-        GalleryList.add(Gallery);
+        galleryList.add(Gallery);
     }
 }
