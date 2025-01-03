@@ -1,6 +1,7 @@
 package com.chocksaway.imager.controller;
 
 import com.chocksaway.imager.domain.Gallery;
+import com.chocksaway.imager.security.SpringSecurityConfiguration;
 import com.chocksaway.imager.service.PhotoService;
 import com.chocksaway.imager.service.GalleryService;
 import jakarta.validation.Valid;
@@ -33,7 +34,8 @@ public class GalleryController {
 
     @RequestMapping("list-gallery")
     public String listAllGallery(ModelMap model) {
-        List<Gallery> gallery = galleryService.findByUsername("milesd");
+        final var username = SpringSecurityConfiguration.getLoggedInUser();
+        List<Gallery> gallery = galleryService.findByUsername(username);
         model.addAttribute("gallery", gallery);
 
         return "list-gallery";
@@ -83,7 +85,7 @@ public class GalleryController {
 
     @RequestMapping(value = "add-gallery", method = RequestMethod.GET)
     public String addGallery(ModelMap model) {
-        var username = (String) model.getAttribute("name");
+        var username = SpringSecurityConfiguration.getLoggedInUser();
         var gallery = Gallery.builder().id(0)
                 .username(username)
                 .description("")
@@ -104,7 +106,7 @@ public class GalleryController {
         if (result.hasErrors()) {
             return "add-gallery";
         }
-        var username = (String) model.get("name");
+        var username = SpringSecurityConfiguration.getLoggedInUser();
         var photoId = photoService.addPhoto(gallery.getDescription(), image);
         galleryService.addGallery(
                 username,
@@ -114,9 +116,4 @@ public class GalleryController {
 
         return "redirect:list-gallery";
     }
-
-
-
-
-
 }
