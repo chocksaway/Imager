@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import java.util.List;
 import java.util.function.Function;
 
 @Configuration
@@ -18,21 +19,31 @@ public class SpringSecurityConfiguration {
 
     @Bean
     public InMemoryUserDetailsManager createUserDetailsManager() {
+        return new InMemoryUserDetailsManager(getUserDetails());
+    }
+
+    private static List<UserDetails> getUserDetails() {
         Function<String, String> passwordEncoder
                 = input -> passwordEncoder().encode(input);
 
-        UserDetails userDetails = User.builder()
-            .passwordEncoder(passwordEncoder)
-            .username("milesd")
-            .password("milesd")
-            .roles("USER", "ADMIN")
-            .build();
-
-        return new InMemoryUserDetailsManager(userDetails);
+        return List.of(
+            User.builder()
+                .passwordEncoder(passwordEncoder)
+                .username("milesd")
+                .password("milesd")
+                .roles("USER", "ADMIN")
+                .build(),
+            User.builder()
+                .passwordEncoder(passwordEncoder)
+                .username("milesd2")
+                .password("milesd2")
+                .roles("USER", "ADMIN")
+                .build()
+        );
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
