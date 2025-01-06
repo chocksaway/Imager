@@ -1,5 +1,8 @@
 package com.chocksaway.imager.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +17,10 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
 public class Gallery implements Serializable {
+    @Id
+    @GeneratedValue
     private int id;
     private String username;
     @Size(min = 10, max = 255, message="The description size is incorrect")
