@@ -1,4 +1,4 @@
-package com.chocksaway.imager.domain;
+package com.chocksaway.imager.entities;
 
 
 import jakarta.persistence.Entity;

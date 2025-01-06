@@ -1,6 +1,6 @@
 package com.chocksaway.imager.service;
 
-import com.chocksaway.imager.domain.Login;
+import com.chocksaway.imager.entities.Login;
 import com.chocksaway.imager.repository.LoginRepository;
 import org.springframework.stereotype.Service;
 

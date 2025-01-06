@@ -1,6 +1,6 @@
 package com.chocksaway.imager.repository;
 
-import com.chocksaway.imager.domain.Login;
+import com.chocksaway.imager.entities.Login;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,8 @@
-package com.chocksaway.imager.domain;
+package com.chocksaway.imager.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -13,14 +14,14 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+@Entity
 @SuperBuilder
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
 public class Gallery implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
     @Size(min = 10, max = 255, message="The description size is incorrect")

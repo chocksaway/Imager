@@ -1,6 +1,6 @@
 package com.chocksaway.imager.controller;
 
-import com.chocksaway.imager.domain.Gallery;
+import com.chocksaway.imager.entities.Gallery;
 import com.chocksaway.imager.security.SpringSecurityConfiguration;
 import com.chocksaway.imager.service.PhotoService;
 import com.chocksaway.imager.service.GalleryService;

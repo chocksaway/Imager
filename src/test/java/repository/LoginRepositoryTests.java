@@ -1,7 +1,7 @@
 package repository;
 
 import com.chocksaway.imager.ImagerApplication;
-import com.chocksaway.imager.domain.Login;
+import com.chocksaway.imager.entities.Login;
 import com.chocksaway.imager.repository.LoginRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

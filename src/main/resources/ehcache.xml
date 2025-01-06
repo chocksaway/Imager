@@ -7,7 +7,7 @@
 
     <cache alias="GalleryCache">
         <key-type>java.lang.Integer</key-type>
-        <value-type>com.chocksaway.imager.domain.Gallery</value-type>
+        <value-type>com.chocksaway.imager.entities.Gallery</value-type>
         <expiry>
             <ttl unit="seconds">30</ttl>
         </expiry>
