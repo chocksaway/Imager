@@ -1,9 +1,6 @@
 package com.chocksaway.imager.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @SuperBuilder
@@ -28,6 +26,10 @@ public class Gallery implements Serializable {
     private String description;
     private LocalDate targetDate;
     private boolean done;
+
+    @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL)
+    private List<Picture> pictures;
+
     private String photoId = null;
     @Serial
     private static final long serialVersionUID = 1L;

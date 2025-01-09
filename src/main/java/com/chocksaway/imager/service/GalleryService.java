@@ -18,6 +18,10 @@ public class GalleryService {
         this.galleryRepository = galleryRepository;
     }
 
+    public List<Gallery> findByPictureId(Long pictureId) {
+        return galleryRepository.findByPictureId(pictureId);
+    }
+
     public List<Gallery> findByUsername(String username) {
         return galleryRepository.findByUsername(username);
     }
@@ -34,7 +38,7 @@ public class GalleryService {
         galleryRepository.save(gallery);
     }
 
-    public void deleteById(int id) {
+    public void deleteById(long id) {
         galleryRepository.deleteById(id);
     }
 
@@ -42,7 +46,7 @@ public class GalleryService {
             value = "GalleryCache",
             key = "#id",
             condition = "#id>10")
-    public Gallery findById(int id) {
+    public Gallery findById(long id) {
         return galleryRepository.findById(id).orElse(null);
     }
 

@@ -1,12 +1,13 @@
 <%@include file="common/header.jspf"%>
 <%@include file="common/navigation.jspf"%>
 
-<h1>View Photo</h1>
+<h1>View Video</h1>
 
-
-<img src="data:image/png;base64,${image}" alt="view image" />
+<video width="320" height="240" controls>
+    <source src="data:video/mp4;base64,${video}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 
 <%@include file="common/footer.jspf"%>
-
 </body>
 </html>

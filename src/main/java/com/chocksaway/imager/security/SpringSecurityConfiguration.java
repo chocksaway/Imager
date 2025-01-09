@@ -29,8 +29,9 @@ public class SpringSecurityConfiguration {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(
-auth -> auth.anyRequest().authenticated() );
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/galleries/**").permitAll()
+                .anyRequest().authenticated());
         http.formLogin(Customizer.withDefaults());
 
         http.csrf(AbstractHttpConfigurer::disable);
