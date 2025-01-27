@@ -28,4 +28,10 @@ public class PictureController {
         logger.info("Received request for picture {} with name {}", userName, pictureName);
         return pictureService.getPictureWithName(userName, pictureName);
     }
+
+    @PostMapping(value = "/galleries/picture", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Picture> addPicture(@RequestBody Picture picture) {
+        logger.info("Received request to add picture : {}", picture);
+        return pictureService.addPicture(picture);
+    }
 }

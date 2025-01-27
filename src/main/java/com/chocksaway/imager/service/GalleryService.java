@@ -27,13 +27,7 @@ public class GalleryService {
     }
 
     public void addGallery(String username, String description, LocalDate localDate, boolean done, String photoId) {
-        var gallery = Gallery.builder()
-                .username(username)
-                .description(description)
-                .targetDate(localDate)
-                .done(done)
-                .photoId(photoId)
-                .build();
+        Gallery gallery = new Gallery(username, description, localDate, done);
 
         galleryRepository.save(gallery);
     }

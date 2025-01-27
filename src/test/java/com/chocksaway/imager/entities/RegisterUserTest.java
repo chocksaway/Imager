@@ -7,11 +7,7 @@ import java.util.List;
 public class RegisterUserTest {
     @Test
     public void testRegisterUser() {
-        List<Picture> pictures = List.of(Picture.builder()
-                .height(100)
-                .width(100)
-                .url("http://example.com")
-                .build());
+        List<Picture> pictures = List.of(new Picture(null, "name", 100, 100, "http://example.com"));
 
         RegisteredUser registeredUser = RegisteredUser.builder()
                 .username("milesd")

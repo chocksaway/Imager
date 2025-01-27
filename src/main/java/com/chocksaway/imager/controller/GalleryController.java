@@ -86,12 +86,7 @@ public class GalleryController {
     @RequestMapping(value = "add-gallery", method = RequestMethod.GET)
     public String addGallery(ModelMap model) {
         var username = SpringSecurityConfiguration.getLoggedInUser();
-        var gallery = Gallery.builder().id(0)
-                .username(username)
-                .description("")
-                .targetDate(LocalDate.now().plusYears(1))
-                .done(false)
-                .build();
+        var gallery = new Gallery(username, "", LocalDate.now(), false);
 
         model.put("gallery", gallery);
         return "add-gallery";
