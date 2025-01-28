@@ -1,10 +1,8 @@
-package com.chocksaway.imager.service;
+package com.chocksaway.imager.repository;
 
 import com.chocksaway.imager.entities.Gallery;
 import com.chocksaway.imager.entities.Picture;
 
-import com.chocksaway.imager.repository.GalleryRepository;
-import com.chocksaway.imager.repository.PictureRepository;
 import config.TestConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
