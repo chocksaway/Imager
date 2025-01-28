@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GalleryService {
@@ -44,7 +45,14 @@ public class GalleryService {
         return galleryRepository.findById(id).orElse(null);
     }
 
-    public void updateGallery(@Valid Gallery gallery) {
-        galleryRepository.save(gallery);
+    public void updateGallery(@Valid Gallery gallery, long id) {
+        Optional<Gallery> existingGallery = galleryRepository.findById(id);
+
+        if (existingGallery.isPresent()) {
+            Gallery updatedGallery = existingGallery.get();
+            updatedGallery.setDescription(gallery.getDescription());
+            updatedGallery.setTargetDate(gallery.getTargetDate());
+            galleryRepository.save(updatedGallery);
+        }
     }
 }

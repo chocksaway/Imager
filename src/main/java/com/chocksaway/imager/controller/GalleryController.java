@@ -73,12 +73,12 @@ public class GalleryController {
 
 
     @RequestMapping(value = "update-gallery", method = RequestMethod.POST)
-    public String updateGallery(@Valid Gallery gallery, BindingResult result, ModelMap model) {
+    public String updateGallery(@RequestParam int id, @Valid Gallery gallery, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "add-gallery";
         }
 
-        galleryService.updateGallery(gallery);
+        galleryService.updateGallery(gallery, id);
         return "redirect:list-gallery";
     }
 
