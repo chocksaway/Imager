@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class DataLoaderService {
@@ -25,10 +26,10 @@ public class DataLoaderService {
     public void loadInitialData() {
 
         Gallery gallery1 = new Gallery("milesd", "Gallery 1 so there !!!!!!!!!!!!!", LocalDate.now(), false);
-        Gallery gallery2 = new Gallery("milesd", "Gallery 2 so there !!!!!!!!!!!!!", LocalDate.now(), false);
-        Gallery gallery3 = new Gallery("milesd", "Gallery 3 so there !!!!!!!!!!!!!", LocalDate.now(), false);
-        Gallery gallery4 = new Gallery("milesd", "Gallery 4 so there !!!!!!!!!!!!!", LocalDate.now(), false);
-        Gallery gallery5 = new Gallery("milesd", "Gallery 5 so there !!!!!!!!!!!!!", LocalDate.now(), false);
+//        Gallery gallery2 = new Gallery("milesd", "Gallery 2 so there !!!!!!!!!!!!!", LocalDate.now(), false);
+//        Gallery gallery3 = new Gallery("milesd", "Gallery 3 so there !!!!!!!!!!!!!", LocalDate.now(), false);
+//        Gallery gallery4 = new Gallery("milesd", "Gallery 4 so there !!!!!!!!!!!!!", LocalDate.now(), false);
+//        Gallery gallery5 = new Gallery("milesd", "Gallery 5 so there !!!!!!!!!!!!!", LocalDate.now(), false);
 
 
         Picture picture1 = new Picture(gallery1, "picture 1", 100, 100, "picture 1");
@@ -43,8 +44,8 @@ public class DataLoaderService {
         Picture picture10 = new Picture(gallery1, "picture 10", 100, 100, "picture 10");
 
 
-        galleryRepository.saveAll(Arrays.asList(
-                gallery1, gallery2, gallery3, gallery4, gallery5
+        galleryRepository.saveAll(List.of(
+                gallery1
         ));
 
         pictureRepository.saveAll(Arrays.asList(
