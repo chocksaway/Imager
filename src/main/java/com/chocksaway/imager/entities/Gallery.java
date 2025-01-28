@@ -31,6 +31,8 @@ public class Gallery implements Serializable {
     @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL)
     private List<Picture> pictures;
 
+    private String photoId = null;
+
     public Gallery(String username, String description, LocalDate targetDate, boolean done) {
         this.username = username;
         this.description = description;
@@ -41,7 +43,6 @@ public class Gallery implements Serializable {
     public Gallery() {
     }
 
-//    private String photoId = null;
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -55,6 +56,18 @@ public class Gallery implements Serializable {
                 '}';
     }
 
+    public int getId() {
+        return this.id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTargetDate(LocalDate targetDate) {
+        this.targetDate = targetDate;
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -65,5 +78,9 @@ public class Gallery implements Serializable {
 
     public String getUsername() {
         return this.username;
+    }
+
+    public boolean getDone() {
+        return this.done;
     }
 }
