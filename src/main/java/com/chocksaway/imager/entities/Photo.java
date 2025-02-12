@@ -14,6 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Document(collection = "photos")
 public class Photo {
+    public Photo(String name) {
+        this.name = name;
+    }
     @Id
     private String id;
 

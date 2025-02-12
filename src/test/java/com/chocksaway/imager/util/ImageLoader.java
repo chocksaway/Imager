@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 public class ImageLoader {
     private static final Logger logger = LoggerFactory.getLogger(ImagerApplication.class);
 
-    public Photo loadImage(final String path) {
+    public Photo loadImage(final String name, final String path) {
         Photo photo = new Photo();
         try {
             // Path to the image file
@@ -27,7 +27,7 @@ public class ImageLoader {
             Binary imageBinary = new Binary(imageBytes);
 
             // Create a Photo object and set the image
-            photo.setName("2cv");
+            photo.setName(name);
             photo.setImage(imageBinary);
         } catch (IOException e) {
             logger.error("Cannot load photo {} ", path);

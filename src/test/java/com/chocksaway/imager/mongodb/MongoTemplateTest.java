@@ -7,7 +7,9 @@ import static org.hamcrest.Matchers.notNullValue;
 import java.util.List;
 
 import com.chocksaway.imager.config.MongoConfig;
+import com.chocksaway.imager.entities.Photo;
 import com.chocksaway.imager.entities.User;
+import com.chocksaway.imager.util.ImageLoader;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,11 +33,18 @@ public class MongoTemplateTest {
         if (!mongoTemplate.collectionExists(User.class)) {
             mongoTemplate.createCollection(User.class);
         }
+
+        if (!mongoTemplate.collectionExists(Photo.class)) {
+            mongoTemplate.createCollection(Photo.class);
+        }
+
+
     }
 
     @AfterEach
     public void tearDown() {
         mongoTemplate.dropCollection(User.class);
+        mongoTemplate.dropCollection(Photo.class);
     }
 
     @Test
@@ -47,6 +56,15 @@ public class MongoTemplateTest {
         mongoTemplate.insert(user);
 
         assertThat(user.getUsername(), is(notNullValue()));
+    }
+
+    @Test
+    public void givenPhotoExists_whenSaving_thenPhotoIsCreated() {
+        ImageLoader imageLoader = new ImageLoader();
+        Photo photo = imageLoader.loadImage("2cv", "src/main/resources/2cv.png");
+
+        mongoTemplate.insert(photo);
+        assertThat(photo.getName(), is(notNullValue()));
     }
 
     @Test
@@ -63,5 +81,19 @@ public class MongoTemplateTest {
         List<User> users = mongoTemplate.find(query, User.class);
 
         assertThat(users.size(), is(1));
+    }
+
+    @Test
+    public void givenPhotoExists_thenPhotoCanBeRetrievedByName() {
+        ImageLoader imageLoader = new ImageLoader();
+        Photo photo = imageLoader.loadImage("2cv", "src/main/resources/2cv.png");
+
+        mongoTemplate.insert(photo);
+
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").is("2cv"));
+        Photo retrievedPhoto = mongoTemplate.findOne(query, Photo.class);
+        assertThat(retrievedPhoto, is(notNullValue()));
+        assertThat(retrievedPhoto.getName(), is("2cv"));
     }
 }
