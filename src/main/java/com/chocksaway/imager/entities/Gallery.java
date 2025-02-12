@@ -31,8 +31,6 @@ public class Gallery implements Serializable {
     @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL)
     private List<Picture> pictures;
 
-    private String photoId = null;
-
     public Gallery(String username, String description, LocalDate targetDate, boolean done) {
         this.username = username;
         this.description = description;

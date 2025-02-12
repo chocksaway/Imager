@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,10 +26,11 @@ public class PictureService {
     }
 
     private static final List<User> users = List.of(
-            User.builder().username("user1").build(),
-            User.builder().username("user2").build(),
-            User.builder().username("user3").build()
+            new User("user1"),
+            new User("user2"),
+            new User("user3")
     );
+
 
     private static final List<Picture> pictures = List.of(
             new Picture(null, "picture 1", 100, 100, "picture 1"),
@@ -55,10 +57,9 @@ public class PictureService {
                 .findFirst();
 
         if (user.isPresent() && picture.isPresent()) {
-            List<Picture> pictureList = List.of(picture.get());
-            return new ResponseEntity<>(User.builder()
-                    .username(user.get().getUsername())
-                    .pictures(pictureList).build(), HttpStatus.OK);
+            User responseUser = user.get();
+            responseUser.setPictures(List.of(picture.get()));
+            return new ResponseEntity<>(responseUser, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

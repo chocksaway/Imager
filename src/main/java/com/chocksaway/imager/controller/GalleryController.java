@@ -102,12 +102,12 @@ public class GalleryController {
             return "add-gallery";
         }
         var username = SpringSecurityConfiguration.getLoggedInUser();
-        var photoId = photoService.addPhoto(gallery.getDescription(), image);
+        photoService.addPhoto(gallery.getDescription(), image);
         galleryService.addGallery(
                 username,
                 gallery.getDescription(),
                 gallery.getTargetDate(),
-                false, photoId);
+                false);
 
         return "redirect:list-gallery";
     }

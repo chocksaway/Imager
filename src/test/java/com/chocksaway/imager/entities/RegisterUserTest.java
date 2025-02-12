@@ -1,6 +1,7 @@
 package com.chocksaway.imager.entities;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import java.util.List;
 
@@ -9,11 +10,10 @@ public class RegisterUserTest {
     public void testRegisterUser() {
         List<Picture> pictures = List.of(new Picture(null, "name", 100, 100, "http://example.com"));
 
-        RegisteredUser registeredUser = RegisteredUser.builder()
-                .username("milesd")
-                .role("admin")
-                .pictures(pictures)
-                .build();
+        User registeredUser = new User("milesd");
+        registeredUser.setRole("admin");
+        registeredUser.setPictures(pictures);
+
 
         assert(registeredUser.getUsername().equals("milesd"));
         assert(registeredUser.getRole().equals("admin"));

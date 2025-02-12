@@ -40,10 +40,9 @@ public class MongoTemplateTest {
 
     @Test
     public void givenUserExists_whenSaving_thenUserIsCreated() {
-        var user = User.builder()
-                .username("John")
-                .age(28)
-                .build();
+
+        var user = new User("John");
+        user.setAge(28);
 
         mongoTemplate.insert(user);
 
@@ -52,13 +51,11 @@ public class MongoTemplateTest {
 
     @Test
     public void givenUsersExist_whenFindingUserWithAgeLessThan50AndGreaterThan20_thenUsersAreFound() {
-        var user = User.builder()
-                .username("Eric")
-                .age(35)
-                .build();
-
+        var user = new User("Eric");
+        user.setAge(35);
         mongoTemplate.insert(user);
-        user = User.builder().username("Richard").build();
+
+        user = new User("Richard");
         mongoTemplate.insert(user);
 
         Query query = new Query();

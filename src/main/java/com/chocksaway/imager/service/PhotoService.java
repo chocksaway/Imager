@@ -12,23 +12,23 @@ import java.util.Optional;
 
 @Service
 public class PhotoService {
-    private final PhotoRepository repository;
+    private final PhotoRepository photoRepository;
 
-    public PhotoService(PhotoRepository repository) {
-        this.repository = repository;
+    public PhotoService(PhotoRepository photoRepository) {
+        this.photoRepository = photoRepository;
     }
 
-    public String addPhoto(String title, MultipartFile file) throws IOException {
+    public String addPhoto(String name, MultipartFile file) throws IOException {
         Photo photo = Photo.builder()
-                .title(title)
+                .name(name)
                 .image(new Binary(BsonBinarySubType.BINARY, file.getBytes()))
                 .build();
 
-        photo = repository.insert(photo);
+        photo = photoRepository.insert(photo);
         return photo.getId();
     }
 
     public Optional<Photo> getPhoto(String id) {
-        return repository.findById(id).stream().findFirst();
+        return photoRepository.findById(id).stream().findFirst();
     }
 }

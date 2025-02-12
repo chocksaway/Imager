@@ -21,7 +21,11 @@
             <c:forEach items="${gallery}" var="gallery">
                 <tr>
                     <td>${gallery.id}</td>
-                    <td><a href="photo?id=${gallery.photoId}">${gallery.description}</a></td>
+
+                    <td>
+                        ${gallery.description}
+                    </td>
+
                     <td>${gallery.targetDate}</td>
                     <td>${gallery.done}</td>
                     <td><a href="delete-gallery?id=${gallery.id}" class="btn btn-warning">Delete</a></td>

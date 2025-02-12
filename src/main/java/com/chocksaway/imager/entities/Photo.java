@@ -17,7 +17,7 @@ public class Photo {
     @Id
     private String id;
 
-    private String title;
+    private String name;
 
     private Binary image;
 }

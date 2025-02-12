@@ -27,7 +27,7 @@ public class GalleryService {
         return galleryRepository.findByUsername(username);
     }
 
-    public void addGallery(String username, String description, LocalDate localDate, boolean done, String photoId) {
+    public void addGallery(String username, String description, LocalDate localDate, boolean done) {
         Gallery gallery = new Gallery(username, description, localDate, done);
 
         galleryRepository.save(gallery);
