@@ -1,12 +1,15 @@
 package com.chocksaway.imager.repository;
 
 import com.chocksaway.imager.entities.Gallery;
+import com.chocksaway.imager.entities.Photo;
 import com.chocksaway.imager.entities.Picture;
 
 import config.TestConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,6 +18,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @DataJpaTest
 @ContextConfiguration(classes = TestConfig.class)
@@ -24,6 +28,9 @@ public class PictureRepositoryTest {
 
     @Autowired
     GalleryRepository galleryRepository;
+
+    @Mock
+    private PhotoRepository photoRepository;
 
     @BeforeEach
     public void setUp() {
@@ -63,5 +70,17 @@ public class PictureRepositoryTest {
             assertNotNull(picture);
             assertEquals("picture1", picture.getName());
         });
+    }
+
+    @Test
+    public void testPhotoExistsByUsingPictureName() {
+        Photo photo = new Photo();
+        photo.setName("2cv");
+        when(photoRepository.findByName("2cv")).thenReturn(Optional.of(photo));
+
+        Optional<Photo> retrievedPhoto = photoRepository.findByName("2cv");
+
+        assertTrue(retrievedPhoto.isPresent());
+        assertEquals("2cv", retrievedPhoto.get().getName());
     }
 }
